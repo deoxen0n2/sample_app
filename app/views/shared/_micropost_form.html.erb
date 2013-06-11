@@ -1,7 +1,13 @@
 <%= form_for(@micropost) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="field">
-    <%= f.text_area :content, placeholder: "Compose new micropost..." %>
+    <%= f.text_area :content, placeholder: "Compose new micropost..."   %>
   </div>
-  <%= f.submit "Post", class: "btn btn-large btn-primary" %>
+  <p class="pull-left" style="font-size: 13px;"><span style="display: inline; font-weight: bold;">Characters Available: </span><span id="char-avail" style="display: inline;">140</span></p>
+  <%= f.submit "Post", class: "btn btn-large btn-primary pull-right" %>
 <% end %>
+<script type="text/javascript">
+  $('#micropost_content').keyup(function() {
+      $('#char-avail').text(140 - $('#micropost_content').val().length);
+  });
+</script>
